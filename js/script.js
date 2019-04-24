@@ -2,9 +2,8 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-   
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
+// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 /*** 
    Add your global variables that store the DOM elements you will 
@@ -17,8 +16,8 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-const list = document.getElementsByTagName('li')
-const itemsPerPage = 10
+const list = document.querySelectorAll("li");
+const itemsPerPage = 10;
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -36,54 +35,40 @@ const itemsPerPage = 10
 ***/
 
 const showPage = (list, page) => {
- const startIndex = (page * itemsPerPage) - itemsPerPage
- const endIndex = (page * itemsPerPage)
+  const startIndex = page * itemsPerPage - itemsPerPage;
+  const endIndex = page * itemsPerPage;
 
- for (let i = 0; i < list.length; i++) {
-      if (list[i] >= startIndex && list[i] <= endIndex) {
-         list.style.display = '';
-      } else {
-         list.style.display = 'block';
-
- }
- console.log(i);
-}
-
+  for (let i = 0; i < list.length; i++) {
+    if (i >= startIndex && i < endIndex) {
+      list[i].style.display = "block";
+    } else {
+      list[i].style.display = "none";
+    }
+  }
+};
 showPage(list, 1);
-
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
-const appendPageLinks = (list) => {
+const appendPageLinks = list => {
+  const pagesNeeded = list.length / itemsPerPage;
+  const pageDiv = document.querySelector(".page");
+  const paginationDiv = document.createElement("div");
+  div.className = "pagination";
+  pageDiv.appendChild(paginationDiv);
+  const ul = document.createElement("ul");
+  paginationDiv.appendChild(ul);
 
-const pagesNeeded = list.length / itemsPerPage;
-const pageDiv = document.querySelector('.page')
-const paginationDiv = document.createElement('div');
-div.className = 'pagination';
-pageDiv.appendChild(paginationDiv);
-const ul = document.createElement('ul');
-paginationDiv.appendChild(ul);
+  for (let i = 0; i < pagesNeeded; i++) {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + [i];
+    ul.appendChild(a);
+  }
 
-
-
-
-for (let i = 0; i < pagesNeeded; i++) {
-   const li = document.createElement('li');
-   const a = document.createElement('a');
-   a.href = '#' + [i];
-   ul.appendChild(a)
-}
-
-for (let i = 0; i < pagesNeeded; i++) {
-   a.addEventListener('click', () => {
-
-
-   });
-
-}
-
-
-}
-
+  for (let i = 0; i < pagesNeeded; i++) {
+    a.addEventListener("click", () => {});
+  }
+};
