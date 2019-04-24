@@ -17,8 +17,8 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-
-
+const list = document.getElementsByTagName('li')
+const itemsPerPage = 10
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -35,16 +35,55 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
+const showPage = (list, page) => {
+ const startIndex = (page * itemsPerPage) - itemsPerPage
+ const endIndex = (page * itemsPerPage)
 
+ for (let i = 0; i < list.length; i++) {
+      if (list[i] >= startIndex && list[i] <= endIndex) {
+         list.style.display = '';
+      } else {
+         list.style.display = 'block';
 
+ }
+ console.log(i);
+}
+
+showPage(list, 1);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
+const appendPageLinks = (list) => {
+
+const pagesNeeded = list.length / itemsPerPage;
+const pageDiv = document.querySelector('.page')
+const paginationDiv = document.createElement('div');
+div.className = 'pagination';
+pageDiv.appendChild(paginationDiv);
+const ul = document.createElement('ul');
+paginationDiv.appendChild(ul);
 
 
 
 
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+for (let i = 0; i < pagesNeeded; i++) {
+   const li = document.createElement('li');
+   const a = document.createElement('a');
+   a.href = '#' + [i];
+   ul.appendChild(a)
+}
+
+for (let i = 0; i < pagesNeeded; i++) {
+   a.addEventListener('click', () => {
+
+
+   });
+
+}
+
+
+}
+
