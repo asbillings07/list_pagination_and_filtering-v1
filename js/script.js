@@ -37,10 +37,10 @@ let currentPage = 1;
 
 const showPage = (list, page) => {
   const startIndex = page * itemsPerPage - itemsPerPage;
-  const endIndex = page * itemsPerPage;
+  const endIndex = page * itemsPerPage - 1;
 
   for (let i = 0; i < list.length; i++) {
-    if (i >= startIndex && i < endIndex) {
+    if (i >= startIndex && i <= endIndex) {
       list[i].style.display = "block";
     } else {
       list[i].style.display = "none";
@@ -62,17 +62,16 @@ const appendPageLinks = list => {
   mainDiv.appendChild(paginationDiv);
   const ul = document.createElement("ul");
   paginationDiv.appendChild(ul);
-  const li = document.createElement("li");
-  const a = document.createElement("a");
 
   for (let i = 0; i < pagesNeeded; i++) {
-    a.setAttribute("href", "#");
-    a.setAttribute("number", i);
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.setAttribute("href", "#", i);
+    console.log(pagesNeeded);
+    //a.setAttribute("number", i);
     ul.appendChild(li);
     li.appendChild(a);
-  }
-
-  for (let i = 0; i < pagesNeeded; i++) {
+    a.className = "active";
     a.addEventListener("click", e => {
       const link = e.target;
       a.removeAttribute("active");
