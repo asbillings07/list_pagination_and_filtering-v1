@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.textContent = [i];
-
       a.setAttribute("href", "#");
 
       ul.appendChild(li);
