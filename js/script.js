@@ -46,19 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       a.setAttribute("href", "#");
 
-      console.log(pagesNeeded);
       ul.appendChild(li);
       li.appendChild(a);
 
       a.addEventListener("click", e => {
+        a.classList.remove("active");
         const link = e.target.textContent;
-        const aLink = e.target;
-
-        for (let i = 0; i < pagesNeeded; i++) {
-          if (aLink) {
-            a.className = "active";
-          }
-        }
+        e.target.classList.add("active");
 
         showPage(list, link);
       });
@@ -82,6 +76,8 @@ const searchBar = () => {
   const searchButton = document.createElement("button");
   searchButton.textContent = "Search";
 
+  searchInput.setAttribute("type", "search");
+
   // adds search bar and button to the page
   placmentHeader.appendChild(searchDiv);
   searchDiv.appendChild(searchInput);
@@ -90,13 +86,17 @@ const searchBar = () => {
   const filter = searchInput.value.toUpperCase();
   const studentList = document.querySelectorAll("li");
 
-  for (let i = 0; i < studentList.length; i++) {
-    name = studentList[i];
-    if (name.toUpperCase().indexOf(filter) == -1) {
-      studentList[i].style.display = "student-item";
-    } else {
-      studentList[i].style.display = "none";
+  searchButton.addEventListener("click", e => {
+    for (let i = 0; i < studentList.length; i++) {
+      student = studentList[i].getElementsByTagName("h3")[0];
+      txtValue = student.textContent;
+      console.log(txtValue);
+      if (filter.toUpperCase().indexOf(txtValue) > -1) {
+        student[i].style.display = "";
+      } else {
+        student[i].style.display = "none";
+      }
     }
-  }
+  });
 };
 searchBar();
