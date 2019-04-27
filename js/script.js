@@ -82,20 +82,27 @@ const searchBar = () => {
   searchDiv.appendChild(searchInput);
   searchDiv.appendChild(searchButton);
 
-  const filter = searchInput.value.toUpperCase();
-  const studentList = document.querySelectorAll("li");
+  const userInput = searchInput.value.toUpperCase();
+  const studentList = document.querySelectorAll("h3");
 
-  searchButton.addEventListener("click", e => {
+  searchButton.addEventListener("click", () => {
     for (let i = 0; i < studentList.length; i++) {
-      student = studentList[i].getElementsByTagName("h3")[0];
-      txtValue = student.textContent;
-      console.log(txtValue);
-      if (filter.toUpperCase().indexOf(txtValue) > -1) {
-        student[i].style.display = "";
+      const studentArr = [];
+      if (studentList[i].indexOf(userInput) > -1) {
+        studentArr.push(studentList[i]);
       } else {
-        student[i].style.display = "none";
+        alert("Student not found");
       }
+
+      console.log(studentArr);
     }
   });
+
+  //   1. retrieve user input and convert it to lowercase
+  //   2. select the studentList
+  //   3. select the textcontent from all h3s in the studentList
+  //   4. find all the matching students,
+  //   5. push them in a new array,
+  //   6. call the showPage function with that array and let the showPage function handle setting its display to block or none
 };
 searchBar();
