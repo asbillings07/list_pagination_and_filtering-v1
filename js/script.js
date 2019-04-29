@@ -7,9 +7,7 @@ FSJS project 2 - List Filter and Pagination
 const list = document.querySelectorAll("li");
 const itemsPerPage = 10;
 let currentPage = 1;
-const studentList = document.getElementsByClassName(".student-Item cf");
-const studentDetails = document.querySelector(".student-list");
-const student = studentList.textContent;
+const studentList = document.querySelectorAll(".student-item");
 const searchInput = document.createElement("input");
 const searchButton = document.createElement("button");
 
@@ -37,7 +35,6 @@ const appendPageLinks = list => {
   const pagesNeeded = list.length / itemsPerPage;
   const mainDiv = document.querySelector(".page");
   const paginationDiv = document.createElement("div");
-
   paginationDiv.className = "pagination";
   mainDiv.appendChild(paginationDiv);
   const ul = document.createElement("ul");
@@ -48,23 +45,20 @@ const appendPageLinks = list => {
     const a = document.createElement("a");
     a.textContent = [i];
     a.setAttribute("href", "#");
-
     ul.appendChild(li);
     li.appendChild(a);
+  }
 
-    const setAction = event => {
+  const a = document.querySelectorAll("a");
+  a[0].classList.add("active");
+  for (let i = 0; i < a.length; i++) {
+    a[i].addEventListener("click", () => {
+      link = event.target.textContent;
+      showPage(list, link);
       for (let i = 0; i < a.length; i++) {
         a[i].classList.remove("active");
       }
-      const e = event.target;
-      e.classList.add("active");
-    };
-
-    a.addEventListener("click", event => {
-      setAction(event);
-      const link = event.target.textContent;
-
-      showPage(list, link);
+      event.target.classList.add("active");
     });
   }
 };
@@ -100,20 +94,23 @@ const searchBar = () => {
   //   6. call the showPage function with that array and let the showPage function handle setting its display to block or none
 };
 searchBar();
-const userInput = searchInput.value;
+
 const searchStudent = () => {
+  const userInput = searchInput.value;
   const studentArr = [];
   for (let i = 0; i < studentList.length; i++) {
     if (userInput.length === 0) {
-      studentArr.push(studentList[i]);
+      alert("please enter a name to start search");
+      break;
     }
-    if (studentDetails[i].textContent.includes(userInput)) {
+    if (studentList[i].querySelector("h3").textContent.includes(userInput)) {
       studentArr.push(studentList[i]);
+      list[i].style.display = "block";
+    } else {
+      list[i].style.display = "none";
     }
   }
-  showPage(studentArr, 1);
 };
-console.log(searchStudent());
 
 searchButton.addEventListener("click", () => {
   searchStudent();
