@@ -100,14 +100,20 @@ const searchStudent = () => {
   const studentArr = [];
   for (let i = 0; i < studentList.length; i++) {
     if (userInput.length === 0) {
-      alert("please enter a name to start search");
+      alert(
+        "No input detected, refresh the page, enter a name and press search to try again."
+      );
       break;
     }
     if (studentList[i].querySelector("h3").textContent.includes(userInput)) {
       studentArr.push(studentList[i]);
-      list[i].style.display = "block";
+      list[i].style.display = "flex";
     } else {
       list[i].style.display = "none";
+      alert(
+        "There are no students by that name on file, please refresh and try again."
+      );
+      break;
     }
   }
 };
@@ -116,5 +122,5 @@ searchButton.addEventListener("click", () => {
   searchStudent();
 });
 searchInput.addEventListener("onkeyup", e => {
-  console.log(input);
+  console.log(event.target);
 });
