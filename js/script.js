@@ -27,6 +27,7 @@ const showPage = (list, page) => {
   }
 };
 showPage(list, currentPage);
+
 /*** 
    function generates, appends and adds 
    functionality to the page to show all of the students
@@ -51,10 +52,17 @@ const appendPageLinks = list => {
     ul.appendChild(li);
     li.appendChild(a);
 
-    a.addEventListener("click", e => {
-      a.classList.remove("active");
-      const link = e.target.textContent;
-      e.target.classList.add("active");
+    const setAction = event => {
+      for (let i = 0; i < a.length; i++) {
+        a[i].classList.remove("active");
+      }
+      const e = event.target;
+      e.classList.add("active");
+    };
+
+    a.addEventListener("click", event => {
+      setAction(event);
+      const link = event.target.textContent;
 
       showPage(list, link);
     });
