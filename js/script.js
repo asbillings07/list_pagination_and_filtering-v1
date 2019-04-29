@@ -85,16 +85,14 @@ const searchBar = () => {
   placmentHeader.appendChild(searchDiv);
   searchDiv.appendChild(searchInput);
   searchDiv.appendChild(searchButton);
-
-  //   1. retrieve user input and convert it to lowercase
-  //   2. select the studentList
-  //   3. select the textcontent from all h3s in the studentList
-  //   4. find all the matching students,
-  //   5. push them in a new array,
-  //   6. call the showPage function with that array and let the showPage function handle setting its display to block or none
 };
 searchBar();
-
+// 1. retrieve user input and convert it to lowercase
+//  2. select the studentList
+//   3. select the textcontent from all h3s in the studentList
+//   4. find all the matching students,
+//   5. push them in a new array,
+//   6. call the showPage function with that array and let the showPage function handle setting its display to block or none
 const searchStudent = () => {
   const userInput = searchInput.value;
   const studentArr = [];
@@ -107,19 +105,24 @@ const searchStudent = () => {
     }
     if (studentList[i].querySelector("h3").textContent.includes(userInput)) {
       studentArr.push(studentList[i]);
-      list[i].style.display = "flex";
+      list[i].style.display = "block";
     } else {
       list[i].style.display = "none";
-      alert(
-        "There are no students by that name on file, please refresh and try again."
-      );
-      break;
     }
   }
 };
 
-searchButton.addEventListener("click", () => {
+const clearArr = arr => {
+  arr.length = 0;
+};
+
+const totalSearch = () => {
   searchStudent();
+  clearArr(studentArr);
+};
+
+searchButton.addEventListener("click", () => {
+  totalSearch();
 });
 searchInput.addEventListener("onkeyup", e => {
   console.log(event.target);
