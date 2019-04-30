@@ -15,4 +15,4 @@ This project shows you how to add paginaton and list filters to your website via
 - CSS
 
 * Achieving Grade:
-  Going for Exceeds grade
+  Going for Meets Expectation. I tried to do some of the exceeds but I don't think I meet all of the factors.
