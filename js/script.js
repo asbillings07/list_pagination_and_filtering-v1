@@ -112,17 +112,8 @@ const searchStudent = () => {
   }
 };
 
-const clearArr = arr => {
-  arr.length = 0;
-};
-
-const totalSearch = () => {
-  searchStudent();
-  clearArr(studentArr);
-};
-
 searchButton.addEventListener("click", () => {
-  totalSearch();
+  searchStudent();
 });
 searchInput.addEventListener("onkeyup", e => {
   console.log(event.target);
